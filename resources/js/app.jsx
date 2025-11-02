@@ -1,9 +1,11 @@
 import './bootstrap';
+import '../css/app.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import Login from './pages/Login';
 
 function App() {
-  return <h1>Hello from React + Laravel ⚡</h1>;
+  return <Login />;
 }
 
 const root = createRoot(document.getElementById('app'));
