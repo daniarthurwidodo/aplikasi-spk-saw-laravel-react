@@ -209,5 +209,11 @@ podman exec -i laravel_postgres psql -U laravel laravel < backup.sql
 If you don't need pgAdmin, you can comment out or remove the `pgadmin` service from `docker-compose.yml` and start only PostgreSQL:
 
 ```bash
+# Docker
 docker-compose up -d postgres
+
+# Podman
+podman-compose up -d postgres
+# or
+podman compose up -d postgres
 ```

@@ -22,3 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Docker / Podman
+/docker-compose.override.yml
+*.sql
+backup.sql

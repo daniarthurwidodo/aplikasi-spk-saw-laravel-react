@@ -1,59 +1,352 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi SPK SAW - Laravel + React
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12.36.1-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+[![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)](https://react.dev)
+[![PHP](https://img.shields.io/badge/PHP-8.4.11-777BB4?style=flat&logo=php)](https://www.php.net)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat&logo=postgresql)](https://www.postgresql.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-## About Laravel
+A Decision Support System (Sistem Pendukung Keputusan) application using the Simple Additive Weighting (SAW) method, built with Laravel and React.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> 📖 **Quick Links**: [Quick Start](QUICKSTART.md) | [Docker Setup](DOCKER.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Backend
+- **Laravel 12.36.1** - PHP Framework
+- **PHP 8.4.11** - Programming Language
+- **PostgreSQL 16** - Database
 
-## Learning Laravel
+### Frontend
+- **React 19.2.0** - UI Library
+- **Vite 7.0.7** - Build Tool
+- **Tailwind CSS 4.0** - CSS Framework
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### DevOps
+- **Docker/Podman** - Container Management
+- **pgAdmin 4** - Database Management Tool
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📋 Prerequisites
 
-## Laravel Sponsors
+Before you begin, ensure you have the following installed:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **PHP** >= 8.2 with extensions:
+  - PDO
+  - pgsql
+  - mbstring
+  - xml
+  - curl
+- **Composer** - PHP package manager
+- **Node.js** >= 20.x - JavaScript runtime
+- **npm** or **yarn** - Package manager
+- **Docker Desktop** or **Podman** - Container runtime
 
-### Premium Partners
+## 🛠️ Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Quick Setup
 
-## Contributing
+For first-time setup, run the automated setup script:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer setup
+```
 
-## Code of Conduct
+This will:
+- Install PHP dependencies
+- Copy `.env.example` to `.env`
+- Generate application key
+- Run database migrations
+- Install Node.js dependencies
+- Build frontend assets
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Manual Setup
 
-## Security Vulnerabilities
+If you prefer manual setup:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/daniarthurwidodo/aplikasi-spk-saw-laravel-react.git
+   cd aplikasi-spk-saw-laravel-react
+   ```
 
-## License
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. **Setup environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Start PostgreSQL with Docker/Podman**
+   ```bash
+   # Using Docker
+   docker-compose up -d
+   
+   # Using Podman
+   podman-compose up -d
+   # or
+   podman compose up -d
+   ```
+
+5. **Run migrations**
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
+
+7. **Build frontend assets**
+   ```bash
+   npm run build
+   ```
+
+## 🚀 Running the Application
+
+### Development Mode
+
+The easiest way to run the application in development mode:
+
+```bash
+composer dev
+```
+
+This starts all necessary services concurrently:
+- Laravel development server (http://localhost:8000)
+- Queue worker
+- Laravel Pail (logs viewer)
+- Vite dev server (HMR)
+
+### Manual Development Mode
+
+Alternatively, run services separately:
+
+**Terminal 1 - Laravel Server:**
+```bash
+php artisan serve
+```
+
+**Terminal 2 - Vite Dev Server:**
+```bash
+npm run dev
+```
+
+**Terminal 3 - Queue Worker (optional):**
+```bash
+php artisan queue:work
+```
+
+### Production Build
+
+```bash
+npm run build
+php artisan serve
+```
+
+## 🗄️ Database Management
+
+### Docker/Podman Commands
+
+**Start containers:**
+```bash
+# Docker
+docker-compose up -d
+
+# Podman
+podman-compose up -d
+```
+
+**Stop containers:**
+```bash
+# Docker
+docker-compose down
+
+# Podman
+podman-compose down
+```
+
+**Access PostgreSQL CLI:**
+```bash
+# Docker
+docker-compose exec postgres psql -U laravel -d laravel
+
+# Podman
+podman exec -it laravel_postgres psql -U laravel -d laravel
+```
+
+### Database Configuration
+
+Default database credentials (configurable in `.env`):
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=laravel
+DB_USERNAME=laravel
+DB_PASSWORD=secret
+```
+
+### pgAdmin Access
+
+Access the web-based database manager:
+- URL: http://localhost:5050
+- Email: `admin@admin.com`
+- Password: `admin`
+
+See [DOCKER.md](DOCKER.md) for detailed Docker/Podman documentation.
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+composer test
+```
+
+Or run PHPUnit directly:
+
+```bash
+php artisan test
+```
+
+## 📁 Project Structure
+
+```
+├── app/                    # Application logic
+│   ├── Http/              # Controllers, Middleware
+│   ├── Models/            # Eloquent models
+│   └── Providers/         # Service providers
+├── database/              # Database files
+│   ├── migrations/        # Database migrations
+│   ├── seeders/          # Database seeders
+│   └── factories/        # Model factories
+├── public/               # Public assets
+├── resources/            # Frontend resources
+│   ├── css/             # Stylesheets
+│   ├── js/              # React components
+│   └── views/           # Blade templates
+├── routes/              # Route definitions
+├── storage/             # Application storage
+├── tests/               # Test files
+└── docker-compose.yml   # Container configuration
+```
+
+## 🔧 Available Commands
+
+### Quick Commands with Make
+
+For convenience, you can use Make commands (recommended):
+
+```bash
+make help           # Show all available commands
+make setup          # First-time setup
+make dev            # Start development server
+make start          # Start containers
+make stop           # Stop containers
+make db-migrate     # Run migrations
+make db-fresh       # Fresh migration + seed
+make test           # Run tests
+make clean          # Clear all caches
+```
+
+Run `make help` to see all available commands.
+
+### Composer Scripts
+
+```bash
+composer setup          # First-time setup
+composer dev           # Run development server with all services
+composer test          # Run tests
+```
+
+### NPM Scripts
+
+```bash
+npm run dev           # Start Vite dev server
+npm run build         # Build for production
+```
+
+### Artisan Commands
+
+```bash
+php artisan serve             # Start development server
+php artisan migrate           # Run migrations
+php artisan migrate:fresh     # Fresh migration
+php artisan db:seed          # Seed database
+php artisan queue:work       # Run queue worker
+php artisan pail             # View logs
+php artisan db:show          # Show database info
+```
+
+## 🌐 Accessing the Application
+
+- **Application**: http://localhost:8000
+- **pgAdmin**: http://localhost:5050
+- **Vite Dev Server**: http://localhost:5173 (when running `npm run dev`)
+
+## 🐛 Troubleshooting
+
+### Vite Manifest Not Found
+
+If you see "Vite manifest not found" error:
+
+```bash
+npm run dev
+```
+
+Or build the assets:
+
+```bash
+npm run build
+```
+
+### Database Connection Issues
+
+1. Check if PostgreSQL container is running:
+   ```bash
+   # Docker
+   docker-compose ps
+   
+   # Podman
+   podman ps
+   ```
+
+2. Verify database credentials in `.env` match `docker-compose.yml`
+
+3. Test database connection:
+   ```bash
+   php artisan db:show
+   ```
+
+### Port Already in Use
+
+Change ports in `.env`:
+
+```env
+DB_PORT=5433
+PGADMIN_PORT=5051
+```
+
+Then restart containers.
+
+## 📚 Documentation
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Docker Documentation](DOCKER.md)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
