@@ -2,17 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Redirect root to login
-Route::get('/', function () {
-    return redirect()->route('login');
-});
-
-// Login page
-Route::get('/login', function () {
+// Catch all routes and let React Router handle them
+Route::get('/{any}', function () {
     return view('app');
-})->name('login');
-
-// Dashboard (protected route example)
-Route::get('/dashboard', function () {
-    return view('app');
-})->name('dashboard');
+})->where('any', '.*');

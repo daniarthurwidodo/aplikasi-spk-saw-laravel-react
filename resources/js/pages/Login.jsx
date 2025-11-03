@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -11,6 +13,8 @@ export default function Login() {
     e.preventDefault();
     // Handle login logic here
     console.log('Login submitted:', formData);
+    // Redirect to dashboard after login
+    navigate('/dashboard');
   };
 
   const handleChange = (e) => {

@@ -19,6 +19,7 @@ A Decision Support System (Sistem Pendukung Keputusan) application using the Sim
 
 ### Frontend
 - **React 19.2.0** - UI Library
+- **React Router DOM 7.9.5** - Client-side Routing
 - **Vite 7.0.7** - Build Tool
 - **Tailwind CSS 4.0** - CSS Framework
 
@@ -339,8 +340,10 @@ Then restart containers.
 
 - [Laravel Documentation](https://laravel.com/docs)
 - [React Documentation](https://react.dev)
+- [React Router Documentation](https://reactrouter.com/)
 - [Vite Documentation](https://vitejs.dev)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Router Setup Guide](ROUTER.md)
 - [Docker Documentation](DOCKER.md)
 
 ## 🤝 Contributing
