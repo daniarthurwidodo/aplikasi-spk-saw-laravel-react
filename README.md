@@ -87,8 +87,6 @@ If you prefer manual setup:
    docker-compose up -d
    
    # Using Podman
-   podman-compose up -d
-   # or
    podman compose up -d
    ```
 
@@ -159,7 +157,7 @@ php artisan serve
 docker-compose up -d
 
 # Podman
-podman-compose up -d
+podman compose up -d
 ```
 
 **Stop containers:**
@@ -168,7 +166,7 @@ podman-compose up -d
 docker-compose down
 
 # Podman
-podman-compose down
+podman compose down
 ```
 
 **Access PostgreSQL CLI:**
