@@ -1,4 +1,4 @@
-# Aplikasi SPK SAW - Laravel + React
+# 📘 SPK-SAWh - Sistem Pendukung Keputusan Sekolah Menengah Kejuruan
 
 [![Laravel](https://img.shields.io/badge/Laravel-12.36.1-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)](https://react.dev)
@@ -6,21 +6,31 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat&logo=postgresql)](https://www.postgresql.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-A Decision Support System (Sistem Pendukung Keputusan) application using the Simple Additive Weighting (SAW) method, built with Laravel and React.
+**SPK-SAWh** is a comprehensive decision support system designed for Indonesian vocational schools (SMK) that integrates data analytics, strategic recommendations, and task management using the **Simple Additive Weighting (SAW)** method.
 
-> 📖 **Quick Links**: [Quick Start](QUICKSTART.md) | [Docker Setup](DOCKER.md) | [Auth Module](docs/auth-module.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
+> 📖 **Quick Links**: [Quick Start](QUICKSTART.md) | [Docker Setup](DOCKER.md) | [Documentation](#-documentation) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
-## 🎯 Current Status: Authentication Module Complete
+## 🎯 Overview
+
+SPK-SAWh helps vocational schools make data-driven strategic decisions by:
+- **Automating school performance evaluation** based on multi-source data (Dapodik, RKAS, Sarpras)
+- **Converting analysis results into actionable tasks** for school management
+- **Providing transparent reporting** to education authorities
+- **Enabling strategic planning** through data analytics and SAW methodology
+
+### 🏆 Key Features
+
+✅ **Multi-Role Access Control** - Super Admin, Admin, Kepala Sekolah, Staff  
+✅ **SAW Decision Engine** - Automated scoring and ranking system  
+✅ **Data Import System** - CSV/XLSX import from Dapodik, RKAS, Sarpras  
+✅ **Task Management** - Kanban-style workflow with approval process  
+✅ **Real-time Dashboard** - Performance monitoring with radar charts  
+✅ **Report Generation** - Automated PDF/Excel reports  
+✅ **File Management** - Secure upload and storage system  
+
+## 🔐 Current Status: Authentication Module Complete
 
 ✅ **MAJOR MILESTONE ACHIEVED**: Complete authentication foundation has been implemented and tested.
-
-### 🔐 Authentication System Features
-- **JWT-based authentication** with secure token management
-- **Multi-role user system**: super_admin, admin, kepala_sekolah, user
-- **School-based user organization** with proper relationships
-- **Complete database schema** with users and schools tables
-- **Ready-to-use API endpoints** for authentication and user management
-- **27 test users** across 5 sample schools from different provinces
 
 ### 🧪 Test the Authentication
 ```bash
@@ -37,30 +47,105 @@ php artisan auth:test
 - **27 Users**: Complete hierarchy with proper role distribution
 - **Full Relationships**: Users ↔ Schools, Kepala Sekolah assignments
 
-### 🚀 Available API Endpoints
-- `POST /api/auth/login` - User authentication ✅
-- `POST /api/auth/logout` - Secure logout ✅  
-- `POST /api/auth/refresh` - Token refresh ✅
-- `GET /api/auth/me` - Current user info ✅
-
-📖 **Complete documentation**: [Auth Module Documentation](docs/auth-module.md)
-
 ## 🚀 Tech Stack
 
 ### Backend
+
 - **Laravel 12.36.1** - PHP Framework
-- **PHP 8.4.11** - Programming Language
+- **PHP 8.4.11** - Programming Language  
 - **PostgreSQL 16** - Database
+- **JWT Authentication** - Secure token-based auth
+- **Redis + BullMQ** - Job Queue System
 
 ### Frontend
+
 - **React 19.2.0** - UI Library
 - **React Router DOM 7.9.5** - Client-side Routing
 - **Vite 7.0.7** - Build Tool
 - **Tailwind CSS 4.0** - CSS Framework
 
-### DevOps
+### DevOps & Storage
+
 - **Docker/Podman** - Container Management
+- **MinIO** - S3-compatible Object Storage
 - **pgAdmin 4** - Database Management Tool
+
+## 👥 User Roles & Permissions
+
+| Role | Description | Key Permissions |
+|------|-------------|-----------------|
+| **Super Admin** | Central controller for all schools and users | Manage schools, roles, weights, audit logs, system settings |
+| **Admin** | School-level operator managing imports and analytics | Upload & validate data, trigger SAW computation, generate reports |
+| **Kepala Sekolah** | Principal with oversight and approval power | View dashboards, approve/reject tasks, create strategic recommendations |
+| **User (Staff)** | School staff performing operational tasks | Create and execute tasks, manage subtasks and uploads |
+
+## 🧩 Core Modules
+
+### 🔐 Authentication & User Management
+- JWT-based authentication with refresh tokens
+- Role-based authorization middleware
+- CRUD for users and school assignments
+- Password reset and account status management
+
+### 🏫 School Management  
+- Manage school profiles, accreditation, and metadata
+- Assign principals (kepala_sekolah_user_id)
+- View all users per school
+
+### ⚖️ SAW Decision Engine
+- Manage kriteria and subkriteria
+- Approve or update bobot with audit tracking
+- Normalize raw data and compute SAW results
+- Generate ranking and export analysis reports
+
+### 📥 Data Import & Mapping
+- Upload CSV/XLSX data from Dapodik, RKAS, Sarpras
+- Map spreadsheet columns to subkriteria
+- Validate and parse data with live preview
+- Automatically normalize and store results
+
+### 🧩 Task & Subtask Management
+- Kanban-based workflow: `created → in_progress → pending_approval → approved/rejected → done → reported`
+- Subtasks with attachments, status, and comments
+- Approval process by principal
+- Automatic report generation after approval
+
+### 📎 File Management & Storage
+- Upload and preview files (multi-form support)
+- Store metadata (owner, related_table, related_id)
+- Support images, PDFs, spreadsheets
+- Generate thumbnails for images
+- Access control per user role
+
+### 📊 Reports & Dashboard
+- Dashboard summary per bidang (A–G categories)
+- View SAW results (scores, ranking, trend)
+- Generate PDF/Excel reports
+- Real-time task summary and progress visualization
+
+## 🚀 Available API Endpoints
+
+### 🔐 Authentication
+- `POST /api/auth/login` - User authentication ✅
+- `POST /api/auth/logout` - Secure logout ✅  
+- `POST /api/auth/refresh` - Token refresh ✅
+- `GET /api/auth/me` - Current user info ✅
+
+### 🏫 School Management
+- `GET /api/schools` - List schools
+- `POST /api/schools` - Add new school  
+- `PATCH /api/schools/:id` - Update school data
+- `GET /api/schools/:id/users` - View school members
+
+### ⚖️ SAW Engine (Planned)
+- `GET /api/kriteria` - Get criteria list
+- `POST /api/kriteria` - Add new criteria
+- `GET /api/bobot` - Get active weights
+- `POST /api/bobot/approve` - Approve weights
+- `POST /api/saw/compute` - Run normalization & SAW
+- `GET /api/saw/results` - View scores & rankings
+
+📖 **Complete API documentation**: [API Reference](docs/api-reference.md)
 
 ## 📋 Prerequisites
 
@@ -270,56 +355,75 @@ php artisan test
 ## 📁 Project Structure
 
 ```
-├── app/                    # Application logic
-│   ├── Http/              # Controllers, Middleware
+├── app/                     # Application logic
+│   ├── Http/               # Controllers, Middleware
 │   │   └── Controllers/
-│   │       └── Auth/      # ✅ Authentication controllers
-│   ├── Models/            # Eloquent models
-│   │   ├── User.php       # ✅ Enhanced with JWT & roles
-│   │   └── School.php     # ✅ School management model
-│   └── Providers/         # Service providers
-├── database/              # Database files
-│   ├── migrations/        # Database migrations
+│   │       └── Auth/       # ✅ Authentication controllers
+│   ├── Models/             # Eloquent models
+│   │   ├── User.php        # ✅ Enhanced with JWT & roles
+│   │   └── School.php      # ✅ School management model
+│   └── Providers/          # Service providers
+├── database/               # Database files
+│   ├── migrations/         # Database migrations
 │   │   ├── *_create_schools_table.php           # ✅ Schools structure
 │   │   ├── *_modify_users_table_for_auth.php    # ✅ Enhanced users
 │   │   └── *_add_kepala_sekolah_to_schools.php  # ✅ Relationships
-│   ├── seeders/          # Database seeders
+│   ├── seeders/           # Database seeders
 │   │   ├── SchoolSeeder.php    # ✅ 5 sample schools
 │   │   └── UserSeeder.php      # ✅ 27 test users
-│   └── factories/        # Model factories
-├── docs/                 # 📝 Documentation
-│   ├── auth-module.md              # ✅ Complete auth docs
-│   └── implementation-summary.md   # ✅ Progress summary
-├── public/               # Public assets
-├── resources/            # Frontend resources
-│   ├── css/             # Stylesheets
-│   ├── js/              # React components
-│   └── views/           # Blade templates
-├── routes/              # Route definitions
-│   └── api.php          # ✅ Authentication API routes
-├── storage/             # Application storage
-├── tests/               # Test files
-└── docker-compose.yml   # Container configuration
+│   └── factories/         # Model factories
+├── docs/                  # 📝 Documentation
+│   ├── modules/           # Module-specific documentation
+│   │   ├── authentication.md       # Auth system guide
+│   │   ├── school-management.md    # School management
+│   │   ├── saw-engine.md          # SAW algorithm implementation
+│   │   ├── data-import.md         # Data import system
+│   │   ├── task-management.md     # Task workflow
+│   │   └── file-management.md     # File upload system
+│   ├── api-reference.md           # Complete API documentation
+│   ├── deployment.md              # Production deployment guide
+│   └── development.md             # Development guidelines
+├── public/                # Public assets
+├── resources/             # Frontend resources
+│   ├── css/              # Stylesheets
+│   ├── js/               # React components
+│   │   ├── components/   # Reusable UI components
+│   │   ├── layouts/      # Layout components
+│   │   ├── pages/        # Page components
+│   │   └── routes.jsx    # Route definitions
+│   └── views/            # Blade templates
+├── routes/               # Route definitions
+│   └── api.php           # ✅ Authentication API routes
+├── storage/              # Application storage
+├── tests/                # Test files
+└── docker-compose.yml    # Container configuration
 ```
 
-### 🎯 Implementation Status
+## 🗓️ Development Roadmap
 
-**✅ COMPLETED (Phase 1)**
-- Database foundation (users, schools, relationships)
-- JWT authentication system  
-- User roles and permissions structure
-- API authentication endpoints
-- Comprehensive test data and validation
+| Milestone | Status | Description |
+|-----------|--------|-------------|
+| **M1** | ✅ **COMPLETE** | Auth + RBAC + CRUD Schools & Users |
+| **M2** | 🚧 **IN PROGRESS** | Data Import System + Mapping |
+| **M3** | 📋 **PLANNED** | SAW Engine + Normalization |
+| **M4** | 📋 **PLANNED** | Dashboard + Alternatif Management |
+| **M5** | 📋 **PLANNED** | Task + Subtask Workflow + Approval |
+| **M6** | 📋 **PLANNED** | Reporting + Bobot History + Audit Logs |
+| **M7** | 📋 **PLANNED** | Monitoring + S3 Storage + Production Hardening |
 
-**🚧 IN PROGRESS (Phase 2)**
-- User management CRUD API
-- Role-based middleware
-- Frontend authentication integration
+### 🎯 Current Phase: M2 - Data Import System
 
-**📋 PLANNED (Phase 3)**
-- SPK SAW algorithm implementation
-- Decision support interface
-- Advanced user management UI
+**Next Features in Development:**
+- CSV/XLSX file upload and validation
+- Column mapping interface for Dapodik/RKAS/Sarpras data
+- Data normalization pipeline
+- Import status tracking and error handling
+
+### 🚀 Success Metrics
+- ✅ 95% import success rate for CSV/XLSX data
+- ✅ SAW computation < 3 seconds per school
+- ✅ Task completion rate tracking
+- ✅ Monthly report generation automated
 
 ## 🔧 Available Commands
 
@@ -421,13 +525,34 @@ Then restart containers.
 
 ## 📚 Documentation
 
+### Core Documentation
+
+- **[Quick Start Guide](QUICKSTART.md)** - Get up and running in 5 minutes
+- **[Docker Setup](DOCKER.md)** - Container deployment guide
+- **[Router Setup](ROUTER.md)** - Frontend routing configuration
+
+### Module Documentation
+
+- **[Authentication System](docs/modules/authentication.md)** - Complete auth implementation guide
+- **[School Management](docs/modules/school-management.md)** - School CRUD and relationship management
+- **[SAW Decision Engine](docs/modules/saw-engine.md)** - Algorithm implementation and usage
+- **[Data Import System](docs/modules/data-import.md)** - CSV/XLSX import and mapping
+- **[Task Management](docs/modules/task-management.md)** - Workflow and approval system
+- **[File Management](docs/modules/file-management.md)** - Upload and storage system
+
+### API & Development
+
+- **[API Reference](docs/api-reference.md)** - Complete endpoint documentation
+- **[Development Guide](docs/development.md)** - Setup and contribution guidelines
+- **[Deployment Guide](docs/deployment.md)** - Production deployment instructions
+
+### External Resources
+
 - [Laravel Documentation](https://laravel.com/docs)
 - [React Documentation](https://react.dev)
 - [React Router Documentation](https://reactrouter.com/)
 - [Vite Documentation](https://vitejs.dev)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Router Setup Guide](ROUTER.md)
-- [Docker Documentation](DOCKER.md)
 
 ## 🤝 Contributing
 
